@@ -6,7 +6,7 @@ header{
 }
 
 section{
-    background: rgb(202, 190, 190);
+    background: rgba(227, 218, 218, 0.396);
     border-radius: 10px;
     padding: 15px;
     width: 500px;
@@ -14,17 +14,17 @@ section{
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.34);
 }
 
-div{
-    text-align: center;
-}
-
 div#foto{
+    text-align: center;
     height: 300px;
 }
 
-div#view{
+div#dataViewDiv{
+    height: 110px;
+}
+
+section#viewsection{
     padding: 30px;
-    height: 30px;
 }
 
 img{
@@ -35,7 +35,7 @@ img{
 
 #selectbox{
     font: normal 12pt Arial;
-    color: rgb(119, 60, 60);
+    color: black;
     text-align: center;
 }
 
