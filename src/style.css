@@ -39,6 +39,10 @@ img{
     text-align: center;
 }
 
+div#edit{
+    text-align: right;
+}
+
 footer{
     color: rgb(50, 43, 43);
     font: 9pt Arial;
