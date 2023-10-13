@@ -1,53 +1,65 @@
 
-window.onload=function(){
-  const selectOptions: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
+window.onload=load;
+
+function load():any{
+  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
+  selectList.selectedIndex = 0
+  selectList.focus()
   const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement
   sectionView.style.display = "none" 
-  nameList(lista, selectOptions)
-}
+  listData(lista, selectList)
+};
+
 
 type Giants = {
   id: number
   name: string
   bio: string
-}
+};
+
 
 let lista: Giants[] = [
     {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
     {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial"},
     {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
     {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar"}
-]
+];
 
 
-function nameList(lista:Giants[], selectOptions:HTMLSelectElement): void{
+// Relacionei o indice dos objetos ao value das options
+// Atribui as options do select os valores correspondentes da lista
+function listData(lista:Giants[], selectList:HTMLSelectElement): void{
   for(let i:number=1; i<=lista.length; ++i){
-    selectOptions.options[i].value = String(i)
-    selectOptions.options[i].text = lista[i-1].name
+    selectList.options[i].value = String(i)
+    // optios[0] é a opção default indicando selecionar item
+    selectList.options[i].text = lista[i-1].name
   }
-}
+};
 
+
+// Exibe Id, Nome e bio do objeto selecionado
 function viewData(): void{
-  const selectOptions: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
-  const index: number = Number(selectOptions.value)
+  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
+  const index: number = Number(selectList.value)
   const viewDiv: HTMLElement = document.getElementById("dataViewDiv") as HTMLElement
   const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement 
 
   if(index){
     const giant: Giants = lista[index-1]
-    // [ID] lista.name : <b><br>bio.
     viewDiv.innerHTML=`[${index}] ${giant.name}: <br><br>${giant.bio}.`
     sectionView.style.display = "block"
   }else{
     sectionView.style.display = "none"
   }
-}
+};
 
 
+// Garante edicao para option(select) != 0
+// Cria dinamicamente interface para indicar o tipo de edição (edição | exclusão)
 function editCall(): void{
   const viewDiv: HTMLElement = document.getElementById("dataViewDiv") as HTMLElement
-  const selectOptions: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
-  const index: number = Number(selectOptions.value)
+  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
+  const index: number = Number(selectList.value)
 
   if(index){
     viewDiv.style.height="50px";
@@ -62,20 +74,20 @@ function editCall(): void{
 
     viewDiv.style.display="inline-block"
 
-    editButton.addEventListener("click", function(){whatToEdit(index)})
-    excludeButton.addEventListener("click", exclude)
+    editButton.addEventListener("click", function(){editInterface(index, viewDiv)})
+    excludeButton.addEventListener("click", function(){excludeListItem(index, viewDiv)})
 
   }else{
     const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement
     sectionView.style.display="none"
     window.alert('Selecione uma opção válida e tente novamente!')
+    load()
   }
+};
 
-}
 
-
-function whatToEdit(index: number):void{
-    const viewDiv: HTMLElement = document.getElementById("dataViewDiv") as HTMLElement
+// Cria dinamicamente interface de edição (name | bio)
+function editInterface(index: number, viewDiv: HTMLElement):void{
     let giant: Giants = lista[index-1]
     viewDiv.innerHTML=`O que deseja alterar em <strong>${giant.name}</strong>?<br><br>`
     const radioName: HTMLInputElement = document.createElement("input")
@@ -93,64 +105,100 @@ function whatToEdit(index: number):void{
     labelName.htmlFor = "name"
     labelName.textContent="Nome "
 
-    const labelbio: HTMLLabelElement = document.createElement("label")
-    labelbio.htmlFor = "bio"
-    labelbio.textContent="Bio "
+    const labelBio: HTMLLabelElement = document.createElement("label")
+    labelBio.htmlFor = "bio"
+    labelBio.textContent="Bio "
 
     viewDiv.appendChild(radioName)
     viewDiv.appendChild(labelName)
     viewDiv.appendChild(radioBio)
-    viewDiv.appendChild(labelbio)
+    viewDiv.appendChild(labelBio)
 
-    let addspace: HTMLBRElement = document.createElement("br")
-    viewDiv.appendChild(addspace)
+    let addBR: HTMLBRElement = document.createElement("br")
+    viewDiv.appendChild(addBR)
 
-    const send: HTMLInputElement = document.createElement("button") as HTMLInputElement
-    send.id = "send"
-    send.textContent="Enviar"
-    send.style.marginTop="20px"
-    viewDiv.appendChild(send)
+    const confirmEdit: HTMLInputElement = document.createElement("button") as HTMLInputElement
+    confirmEdit.id = "confirmEdit"
+    confirmEdit.textContent="Confirmar"
+    confirmEdit.style.marginTop="20px"
+    viewDiv.appendChild(confirmEdit)
 
-    send.addEventListener("click", function editValue(this, optionToEdit){})
-}
+    confirmEdit.addEventListener("click", function(){
+      editValue(radioName.name, index, viewDiv)
+    })
+};
 
 
-// function editValue(send:HTMLInputElement, nameGroup:MouseEvent):void{
+// cria dinamicamicamente caixa de input text para entrada do usuário para edição de dados
+// Verifica input se válido. Confirma e implementa edição após envio do input pelo usuário
+function editValue(nameRadiogroup:string, index: number, viewDiv: HTMLElement):void{
 
-//     // editButton.addEventListener("click", function(){editValues(index)})
-
-//     //viewDiv.innerHTML=''
+  const giant: Giants = lista[index-1];
     
-//     const inputNewAtribute: HTMLInputElement = document.createElement("input") as HTMLInputElement
-//     inputNewAtribute.type = "text"
-//     inputNewAtribute.id = "newValue"
-//     const labelNewAtribute = document.createElement("label")
-    
-//     // criar botao enviar ******************************
-//     let editNome: HTMLInputElement = document.getElementsByName("optionToEdit")[0] as HTMLInputElement
-//     if(editNome && editNome.checked){ // se enviar e checked
-//       labelNewAtribute.htmlFor = "Nome: "
-//       // if(enviar)giant.name = inputNewAtribute.value
+  const inputBox: HTMLInputElement = document.createElement("input") as HTMLInputElement
+  inputBox.type = "text"
+  inputBox.id = "newValue"
+  const labelInputBox: HTMLLabelElement = document.createElement("label")
+  
+  let editNome: HTMLInputElement = document.getElementsByName(nameRadiogroup)[0] as HTMLInputElement
+  let attributeToEdit: string
 
-//     }else{
-//       labelNewAtribute.htmlFor = "Bio: "
-//       giant.bio = inputNewAtribute.value
-//     }
-// }
-
-  function exclude():void{
-
+  if(editNome.checked){
+    attributeToEdit = "name"
+    labelInputBox.innerText = "Nome: "
+  }else{
+    attributeToEdit = "bio"
+    labelInputBox.innerText = "Bio: "
   }
 
+  viewDiv.innerHTML=''
+
+  viewDiv.appendChild(labelInputBox)
+  viewDiv.appendChild(inputBox)
+
+  const addBR: HTMLBRElement = document.createElement("br")
+  viewDiv.appendChild(addBR)
+
+  const sendButton: HTMLInputElement = document.createElement("button") as HTMLInputElement
+  sendButton.id = "sendButton"
+  sendButton.textContent="Enviar"
+  sendButton.style.marginTop="20px"
+
+  viewDiv.appendChild(sendButton)
+
+  sendButton.addEventListener("click", function(){
+    if(inputBox.value){
+      if(window.confirm('Deseja continuar?')){
+        if(attributeToEdit === 'name'){
+          giant.name = inputBox.value
+        }else{
+          giant.bio = inputBox.value
+        }
+      }
+    }else{
+      window.alert('Informe uma alteração válida!')
+    }
+    load()
+  })
+};
+
+
+// Confirma exclusão
+// Faz shift dos itens na lista para remover item e atualiza options do select
+function excludeListItem(indexSelect:number, viewDiv:HTMLElement):void{
+  const indexItemList: number = indexSelect - 1
+  const penultItem: number = lista.length-1
+
+  if(window.confirm('Deseja continuar?')){
+    for(let i: number = indexItemList; i<penultItem; ++i){
+      lista[i] = lista[i+1]
+    }
   
-
-
-// *a) **Crie uma função que retorne a bio do id passado **************
-// *b)* Crie uma função que retorne o name do id passado **************
-// *c)* Crie uma função que apague um item da lista a partir de um id passado
-// *d)* Crie uma função que altere a bio ou o name a partir de um id passado
-// *e)* Demonstre todas as funções com o paradigma funcional e com o imperativo
-
-// funcao edit
-// funcao view OK
-// funcao del
+    const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
+    const lastOption: number = lista.length--
+    selectList.options[lastOption].text = ''
+    selectList.options[lastOption].value = ''
+    --length
+  }
+  load()
+};
