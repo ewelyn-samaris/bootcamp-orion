@@ -1,5 +1,5 @@
 {
-  "name": "History Giants",
+  "name": "history-giants",
   "version": "1.0.0",
   "description": "giantsdeploy",
   "main": "dist/deploy.js",
