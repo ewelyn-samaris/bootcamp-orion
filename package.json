@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ewelyn-samaris/bootcamp-orion/issues"
   },
-  "homepage": "https://github.com/ewelyn-samaris/bootcamp-orion#readme"
+  "homepage": "https://github.com/ewelyn-samaris/bootcamp-orion#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
 }
