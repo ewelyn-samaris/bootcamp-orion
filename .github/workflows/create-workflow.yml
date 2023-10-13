@@ -32,10 +32,8 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Setup Node.js
         uses: actions/setup-node@v2
-        with: 
+        with:
           node-version: 16
-          source:
-          destination:
       - name: Install dependencies
         run: npm install
       - name: Build
