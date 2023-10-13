@@ -1,14 +1,12 @@
+document.addEventListener("DOMContentLoaded", load);
 
-window.onload=load;
-
-
-function load():any{
-  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
-  selectList.selectedIndex = 0
-  selectList.focus()
-  const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement
-  sectionView.style.display = "none" 
-  listData(lista, selectList)
+function load() {
+  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement;
+  selectList.selectedIndex = 0;
+  selectList.focus();
+  const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement;
+  sectionView.style.display = "none";
+  listData(lista, selectList);
 };
 
 
