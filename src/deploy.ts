@@ -1,6 +1,7 @@
 
 window.onload=load;
 
+
 function load():any{
   const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
   selectList.selectedIndex = 0
