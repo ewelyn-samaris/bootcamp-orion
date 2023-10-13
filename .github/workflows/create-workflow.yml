@@ -10,8 +10,8 @@ on:
   # workflow_dispatch
 
 permissions:
-  contents: read-all
-  id-token: write-all
+  contents: read
+  id-token: write
 
 jobs:
   # Build job
