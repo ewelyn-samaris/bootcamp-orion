@@ -36,12 +36,9 @@ let lista: Giants[] = [
 ];
 
 
-// Relacionei o indice dos objetos ao value das options
-// Atribui as options do select os valores correspondentes da lista
 function listData(lista:Giants[], selectList:HTMLSelectElement): void{
   for(let i:number=1; i<=lista.length; ++i){
     selectList.options[i].value = String(i)
-    // optios[0] é a opção default indicando selecionar item
     selectList.options[i].text = lista[i-1].name
   }
 };
@@ -55,8 +52,7 @@ function viewData(): void{
   const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement 
 
   if(index){
-    const giant: Giants = lista[index-1]
-    viewDiv.innerHTML=`[${index}] ${giant.name}: <br><br>${giant.bio}.`
+    viewDiv.innerHTML=`[${index}] ${lista[index-1].name}: <br><br>${lista[index-1].bio}.`
     sectionView.style.display = "block"
   }else{
     sectionView.style.display = "none"
