@@ -26,6 +26,9 @@ jobs:
     - name: install dependecies
       run:  npm install
 
+    -name: navigate to src directory
+      run: cd src
+
     - name: build
       run:  npx tsc
 
