@@ -28,10 +28,11 @@ jobs:
     - name: build
       run:  npx tsc
 
-    - name: upload artifact
+    - name: create and upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
+        path: dist/
 
     - name: deploy to Github Pages
       uses: actions/deploy-pages@v2
