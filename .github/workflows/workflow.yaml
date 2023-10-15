@@ -46,5 +46,5 @@ jobs:
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
       with:
-        artifact_name: dist/
+        artifact_name: dist
         token: ${{ secrets.DEPLOY_KEY }}
