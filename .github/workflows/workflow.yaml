@@ -39,4 +39,4 @@ jobs:
       uses: actions/deploy-pages@v2
       with:
         artifact_name: dist
-        token: ${{ secrets.deploy_key }}
+        #token: ${{ secrets.deploy_key }}
