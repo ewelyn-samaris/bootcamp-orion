@@ -32,6 +32,9 @@ jobs:
     - name: build
       run:  npx tsc
 
+    - name: create a dist folder
+      run: mkdir -p ../dist
+
     - name: copy files to /dist
       run: cp -r ./* ../dist
 
