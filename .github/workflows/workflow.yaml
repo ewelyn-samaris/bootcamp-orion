@@ -32,6 +32,9 @@ jobs:
     - name: build
       run:  npx tsc
 
+    - name: copy files to /dist
+      run: cp -r ./* ../dist
+
     - name: create and upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
