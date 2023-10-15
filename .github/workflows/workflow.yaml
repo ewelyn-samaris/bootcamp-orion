@@ -39,4 +39,5 @@ jobs:
       uses: actions/deploy-pages@v2
       with:
         artifact_name: dist
-        token: ${{ secrets.deploy_key }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
