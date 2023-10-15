@@ -34,8 +34,8 @@ jobs:
     - name: Create a dist folder
       run: mkdir -p ../dist
 
-    - name: Copy .js, .html, and .css files to /dist
-      run: find . -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -exec cp {} ../dist/ \;
+    - name: Copy all static files to /dist
+      run: find . -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" -o -name "*.png" -o -name "*.jpg" -o -name "*.gif" \) -exec cp {} dist/ \;
 
     - name: Create and upload artifact
       uses: actions/upload-pages-artifact@v2
