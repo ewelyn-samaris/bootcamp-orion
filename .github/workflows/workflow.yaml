@@ -49,6 +49,7 @@ jobs:
         artifact_name: dist
         token: ${{ secrets.DEPLOY_KEY }}
 
+        # Alterado para usar o nome correto do arquivo principal
         rewrites:
           - from: /index.html
             to: /index.html?app=index.js
