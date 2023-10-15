@@ -37,4 +37,6 @@ jobs:
 
     - name: deploy to Github Pages
       uses: actions/deploy-pages@v2
+      with:
+        artifact: dists
       
