@@ -38,7 +38,8 @@ jobs:
         npx tsc --outDir ../dist/
         ls
 
-    - name: Copy .js, .html, and .css files to /dist
+    - name: Copy files to dist
+      needs: Build
       run: |
         ls
         cp -r ./src/* ../dist/
@@ -48,6 +49,7 @@ jobs:
         ls
 
     - name: Create and upload artifact
+      needs: Copy files to dist
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
