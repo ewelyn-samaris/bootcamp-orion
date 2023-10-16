@@ -31,13 +31,13 @@ jobs:
     - name: Build
       run: npx tsc
 
-    - name: Create a dist folder
-      run: mkdir -p ../dist
-
     - name: Copy all static files to /dist
       run: find ./src -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" -o -name "*.png" \) -exec cp {} dist/ \;
 
-    - name: Create and upload artifact
+    - name: Navigate to the dist directory
+      run: cd ..
+
+    - name: upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
