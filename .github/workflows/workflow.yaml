@@ -36,7 +36,8 @@ jobs:
         run: |
           cd src
           npx tsc
-          ls          
+          cp -r ./* ../dist
+          ls
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,13 +47,11 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: dist-src
-          path: |
-            /dist/**
-            /src/**
+          name: dist
+          path: /dist
 
       - name: Deploy to Github Pages
         uses: actions/deploy-pages@v2
         with:
-          artifact_name: dist-src
+          artifact_name: dist
           token: ${{ secrets.DEPLOY_KEY }}
