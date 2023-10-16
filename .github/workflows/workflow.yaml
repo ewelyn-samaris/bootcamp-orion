@@ -46,14 +46,15 @@ jobs:
   deploy:
     needs: build
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: dist-src
-        path: dist/ src/
+    steps:
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-src
+          path: dist/ src/
 
-    - name: Deploy to Github Pages
-      uses: actions/deploy-pages@v2
-      with:
-        artifact_name: dist-src
-        token: ${{ secrets.DEPLOY_KEY }}
+      - name: Deploy to Github Pages
+        uses: actions/deploy-pages@v2
+        with:
+          artifact_name: dist-src
+          token: ${{ secrets.DEPLOY_KEY }}
