@@ -34,10 +34,16 @@ jobs:
     - name: Create a dist folder
       run: |
         mkdir -p ../dist
+        echo "onde criei dist: "
         ls
 
     - name: Copy .js, .html, and .css files to /dist
-      run: find . -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -exec cp {} ../dist/ \;
+      run: |
+        ls
+        find ./src -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -exec cp {} ../dist/ \;
+        cd ../dist/
+        echo "o que tem em dist: "
+        ls
 
     - name: Create and upload artifact
       uses: actions/upload-pages-artifact@v2
