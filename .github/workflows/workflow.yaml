@@ -28,13 +28,16 @@ jobs:
     - name: Navigate to the src directory
       run: cd src
 
-    - name: Build
-      run: npx tsc -d
-
     - name: Create a dist folder
       run: |
         mkdir -p ../dist
         echo "onde criei dist: "
+        ls
+
+    - name: Build
+      run: |
+        npx tsc
+        echo "o que tem em src: "
         ls
 
     - name: Copy .js, .html, and .css files to /dist
@@ -49,7 +52,7 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
-        path: /dist/
+        path: dist/
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
