@@ -37,8 +37,10 @@ jobs:
           cd src
           npx tsc
           cp -r ./* ../dist
+          echo "dentro de src: "
           ls
           cd ../dist
+          echo "dentro de dist: "
           ls
 
       - name: Upload artifact
