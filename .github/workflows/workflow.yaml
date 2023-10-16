@@ -29,6 +29,7 @@ jobs:
 
       - name: Navigate to the src directory and build
         run: |
+          cd src
           npx tsc -d
           cp -r ./* ./dist
           echo "dentro de src: "
