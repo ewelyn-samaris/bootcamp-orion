@@ -32,7 +32,7 @@ jobs:
       run: cd src
 
     - name: Build
-      run: npx tsc --outDir ../dist
+      run: npx tsc
 
     - name: Copy files to /dist
       run: cp -r ./* ../dist
@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
-        path: ../dist
+        path: ./dist/
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
