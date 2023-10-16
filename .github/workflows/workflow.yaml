@@ -29,7 +29,7 @@ jobs:
       run: cd src
 
     - name: Build
-      run: npx tsc
+      run: npx tsc -d
 
     - name: Create a dist folder
       run: |
@@ -40,7 +40,7 @@ jobs:
     - name: Copy .js, .html, and .css files to /dist
       run: |
         ls
-        find ./src -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -exec cp {} ../dist/ \;
+        find ./src -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" -o -name "*.png" \) -exec cp {} ../dist/ \;
         cd ../dist/
         echo "o que tem em dist: "
         ls
@@ -49,7 +49,7 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
-        path: dist/
+        path: /dist/
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
