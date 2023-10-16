@@ -44,8 +44,14 @@ jobs:
     needs: build
 
     steps:
+
+      - name: confere
+        run: |
+          cd dist
+          ls
+
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist
           path: /dist
