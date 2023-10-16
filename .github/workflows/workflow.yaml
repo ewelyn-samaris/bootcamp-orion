@@ -36,11 +36,8 @@ jobs:
         run: cd src
 
       - name: Build
-        run: npx tsc
-
-      - name: Navigate to /
         run: |
-          cd ..
+          npx tsc
           ls
 
   deploy:
