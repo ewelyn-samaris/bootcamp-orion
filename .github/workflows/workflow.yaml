@@ -39,15 +39,13 @@ jobs:
     - name: upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        name: dist
-        path: |
-          dist/**
-          src/**
-        exclude: |
-          **/*.ts
+        name: dist-src
+        path: /dist/** /src/**
+        excludes: |
+          *.ts
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
       with:
-        artifact_name: dist
+        artifact_name: dist-src
         token: ${{ secrets.DEPLOY_KEY }}
