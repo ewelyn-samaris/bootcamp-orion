@@ -46,10 +46,7 @@ jobs:
     steps:
 
       - name: confere
-        run: |
-          ls
-          cd dist
-          ls
+        run: ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
