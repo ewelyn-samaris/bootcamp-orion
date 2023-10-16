@@ -2,49 +2,52 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ "feature/exercicio3" ]
+    branches:
+      - feature/exercicio3
   pull_request:
-    branches: [ "develop" ]
+    branches:
+      - develop
 
 permissions:
   id-token: write
 
-jobs: 
+jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16.x
-    
-    - name: Install dependencies
-      run: npm install
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
 
-    - name: create dist folder
-      run: |
-        mkdir -p dist
-        ls
+      - name: Install dependencies
+        run: npm install
 
-    - name: navigate to the src directory
-      run: cd src
+      - name: Create dist folder
+        run: |
+          mkdir -p dist
+          ls
 
-    - name: Build
-      run: npx tsc
+      - name: Navigate to the src directory
+        run: cd src
 
-    - name: Navigate to /
-      run: |
-        cd ..
-        ls
+      - name: Build
+        run: npx tsc
+
+      - name: Navigate to /
+        run: |
+          cd ..
+          ls
 
   deploy:
     needs: build
-    - name: upload artifact
-      uses: actions/upload-pages-artifact@v2
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
       with:
         name: dist-src
         path: dist/ src/
