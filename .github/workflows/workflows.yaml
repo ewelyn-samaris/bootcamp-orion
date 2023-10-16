@@ -18,36 +18,43 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Use Node.js
+      needs: Checkout
       uses: actions/setup-node@v3
       with:
         node-version: 16.x
     
     - name: Install dependencies
+      needs: Use Node.js
       run: npm install
 
-    - name: Create dist folder
+    - name: create dist folder
       run: |
         mkdir -p dist
         ls
 
-    - name: Navigate to the src directory
+    - name: navigate to the src directory
+      needs: create dist folder
       run: cd src
 
     - name: Build
+      need: navigate to the src directory
       run: npx tsc
 
     - name: Navigate to /
+      needs: Build
       run: |
         cd ..
         ls
 
     - name: upload artifact
+      needs: Navigate to /
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist-src
         path: dist/ src/
 
     - name: Deploy to Github Pages
+      needs: upload artifacts
       uses: actions/deploy-pages@v2
       with:
         artifact_name: dist-src
