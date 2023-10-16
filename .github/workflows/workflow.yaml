@@ -38,6 +38,8 @@ jobs:
           npx tsc
           cp -r ./* ../dist
           ls
+          cd ../dist
+          ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
