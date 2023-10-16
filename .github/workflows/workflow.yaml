@@ -29,7 +29,6 @@ jobs:
       run: |
         mkdir -p ../dist
         ls
-
     - name: Navigate to the src directory
       run: cd src
 
@@ -37,9 +36,7 @@ jobs:
       run: |
         npx tsc --outDir ../dist/
         ls
-
-    - name: Copy files to dist
-      run-after: Build
+    - name: Copy .js, .html, and .css files to /dist
       run: |
         ls
         cp -r ./src/* ../dist/
@@ -47,9 +44,7 @@ jobs:
         rm app.ts
         echo "o que tem em dist: "
         ls
-
     - name: Create and upload artifact
-      run-after: Copy files to dist
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
