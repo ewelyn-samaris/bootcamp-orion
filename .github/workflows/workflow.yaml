@@ -36,6 +36,11 @@ jobs:
     - name: Build
       run: npx tsc
 
+    - name: Navigate to /
+      run: |
+        cd ..
+        ls
+
     - name: upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
