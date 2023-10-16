@@ -32,7 +32,7 @@ jobs:
       run: cd src
 
     - name: Build
-      run: npx tsc --outDir ../dist
+      run: npx tsc
 
     - name: Copy files to /dist
       run: cp -r ./* ../dist
