@@ -47,6 +47,7 @@ jobs:
 
       - name: confere
         run: |
+          ls
           cd dist
           ls
 
