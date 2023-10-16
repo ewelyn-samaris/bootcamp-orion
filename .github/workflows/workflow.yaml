@@ -47,7 +47,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist-src
-          path: dist/ src/
+          path: |
+            /dist/**
+            /src/**
 
       - name: Deploy to Github Pages
         uses: actions/deploy-pages@v2
