@@ -44,10 +44,10 @@ jobs:
           ls
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: dist
-          path: /dist/
+          path: dist/
 
       - name: Deploy to Github Pages
         uses: actions/deploy-pages@v2
