@@ -25,14 +25,14 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Navigate to the src directory
-      run: cd src
-
     - name: Create a dist folder
       run: |
         mkdir -p ../dist
         echo "onde criei dist: "
         ls
+
+    - name: Navigate to the src directory
+      run: cd src
 
     - name: Build
       run: |
@@ -43,8 +43,9 @@ jobs:
     - name: Copy .js, .html, and .css files to /dist
       run: |
         ls
-        find ./src -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" -o -name "*.png" \) -exec cp {} ../dist/ \;
+        cp -r ./src/* ../dist/
         cd ../dist/
+        rm app.ts
         echo "o que tem em dist: "
         ls
 
@@ -52,7 +53,7 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
-        path: dist/
+        path: ../dist/
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
