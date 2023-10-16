@@ -26,7 +26,9 @@ jobs:
       run: npm install
 
     - name: Create dist folder
-      run: mkdir -p dist
+      run: |
+        mkdir -p dist
+        ls
 
     - name: Navigate to the src directory
       run: cd src
