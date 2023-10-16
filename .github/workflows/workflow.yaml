@@ -40,8 +40,11 @@ jobs:
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
-        path: ./dist/** ./src/**
-        exclude: *.ts
+        path: |
+          dist/**
+          src/**
+        exclude: |
+          **/*.ts
 
     - name: Deploy to Github Pages
       uses: actions/deploy-pages@v2
