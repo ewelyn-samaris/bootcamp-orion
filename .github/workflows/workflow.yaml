@@ -39,7 +39,7 @@ jobs:
         ls
 
     - name: Copy files to dist
-      needs: Build
+      run-after: Build
       run: |
         ls
         cp -r ./src/* ../dist/
@@ -49,7 +49,7 @@ jobs:
         ls
 
     - name: Create and upload artifact
-      needs: Copy files to dist
+      run-after: Copy files to dist
       uses: actions/upload-pages-artifact@v2
       with:
         name: dist
