@@ -2,56 +2,51 @@ name: Continuous Integration
 
 on:
   push:
-    branches:
-      - feature/exercicio3
+    branches: [ "feature/exercicio3" ]
   pull_request:
-    branches:
-      - develop
+    branches: [ "develop" ]
 
 permissions:
   id-token: write
 
-jobs:
+jobs: 
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    
+    - name: Install dependencies
+      run: npm install
 
-      - name: Install dependencies
-        run: npm install
+    - name: Navigate to the src directory
+      run: cd src
 
-      - name: Navigate to the src directory and build
-        run: |
-          cd src
-          npx tsc -d
-          mkdir dist
-          cp -r ./* /dist
-          echo "dentro de src: "
-          ls
-          rm app.ts
-          cd dist
-          echo "dentro de dist: "
-          ls
-          echo "tamanho de dist: "
-          du -sh
-          echo "links fisicos na dist: "
-          find . -type l
+    - name: Build
+      run: npx tsc
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist/
+    - name: Create a dist folder
+      run: |
+        mkdir -p ../dist
+        ls
 
-      - name: Deploy to Github Pages
-        uses: actions/deploy-pages@v2
-        with:
-          artifact_name: dist
-          token: ${{ secrets.DEPLOY_KEY }}
+    - name: Copy .js, .html, and .css files to /dist
+      run: find . -type f \( -name "*.js" -o -name "*.html" -o -name "*.css" \) -exec cp {} ../dist/ \;
+
+    - name: Create and upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        name: dist
+        path: dist/
+
+    - name: Deploy to Github Pages
+      uses: actions/deploy-pages@v2
+      with:
+        artifact_name: dist
+        token: ${{ secrets.DEPLOY_KEY }}
