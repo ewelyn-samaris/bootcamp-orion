@@ -28,7 +28,6 @@ jobs:
     - name: Create a dist folder
       run: |
         mkdir -p ../dist
-        echo "onde criei dist: "
         ls
 
     - name: Navigate to the src directory
@@ -36,8 +35,7 @@ jobs:
 
     - name: Build
       run: |
-        npx tsc
-        echo "o que tem em src: "
+        npx tsc --outDir ../dist/
         ls
 
     - name: Copy .js, .html, and .css files to /dist
