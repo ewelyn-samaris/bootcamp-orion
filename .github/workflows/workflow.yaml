@@ -26,13 +26,13 @@ jobs:
       run: npm install
 
     - name: Create dist folder
-      run: mkdir dist
+      run: mkdir ./dist
 
     - name: Navigate to the src directory
       run: cd src
 
     - name: Build
-      run: npx tsc
+      run: npx tsc --outDir ../dist
 
     - name: Copy files to /dist
       run: cp -r ./* ../dist
