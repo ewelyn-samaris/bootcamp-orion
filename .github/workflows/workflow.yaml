@@ -43,6 +43,10 @@ jobs:
           rm app.ts
           echo "dentro de dist: "
           ls
+          echo "tamanho de dist: "
+          du -sh
+          echo "links fisicos na dist: "
+          find . -type l
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
