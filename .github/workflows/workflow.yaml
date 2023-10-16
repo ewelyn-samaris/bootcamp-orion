@@ -40,6 +40,7 @@ jobs:
           echo "dentro de src: "
           ls
           cd ../dist
+          rm app.ts
           echo "dentro de dist: "
           ls
 
