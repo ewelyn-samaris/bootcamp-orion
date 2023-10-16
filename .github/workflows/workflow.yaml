@@ -27,20 +27,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create dist folder
-        run: |
-          mkdir -p dist
-          ls
-
       - name: Navigate to the src directory and build
         run: |
-          cd src
-          npx tsc
-          cp -r ./* ../dist
+          npx tsc -d
+          cp -r ./* ./dist
           echo "dentro de src: "
           ls
-          cd ../dist
           rm app.ts
+          cd dist
           echo "dentro de dist: "
           ls
           echo "tamanho de dist: "
