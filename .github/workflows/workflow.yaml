@@ -1,0 +1,57 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "feature/exercicio3" ]
+  pull_request:
+    branches: [ "develop" ]
+
+permissions:
+  id-token: write
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Create a dist folder
+      run: |
+        mkdir -p ../dist
+        ls
+    - name: Navigate to the src directory
+      run: cd src
+
+    - name: Build
+      run: |
+        npx tsc --outDir ../dist/
+        ls
+    - name: Copy .js, .html, and .css files to /dist
+      run: |
+        ls
+        cp -r ./src/* ../dist/
+        cd ../dist/
+        rm app.ts
+        echo "o que tem em dist: "
+        ls
+    - name: Create and upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        name: dist
+        path: ../dist/
+
+    - name: Deploy to Github Pages
+      uses: actions/deploy-pages@v2
+      with:
+        artifact_name: dist
+        token: ${{ secrets.DEPLOY_KEY }}

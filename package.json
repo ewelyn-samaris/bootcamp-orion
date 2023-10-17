@@ -1,0 +1,22 @@
+{
+  "name": "history-giants",
+  "version": "1.0.0",
+  "description": "giantsdeploy",
+  "main": "./dist/*",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ewelyn-samaris/bootcamp-orion.git"
+  },
+  "author": "Ewelyn Samaris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ewelyn-samaris/bootcamp-orion/issues"
+  },
+  "homepage": "https://github.com/ewelyn-samaris/bootcamp-orion#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
