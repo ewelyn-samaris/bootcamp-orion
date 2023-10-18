@@ -1,6 +1,7 @@
+
 document.addEventListener("DOMContentLoaded", load);
 
-function load() {
+function load():void{
   const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement;
   selectList.selectedIndex = 0;
   selectList.focus();
