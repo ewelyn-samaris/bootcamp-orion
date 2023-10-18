@@ -2,48 +2,54 @@
 
 window.onload=load;
 
-
-function load():any{
-  const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
-  let reloadedSelectList: HTMLSelectElement = reloadSelect(selectList) as HTMLSelectElement
-  const sectionView: HTMLElement = document.getElementById("dataViewSection") as HTMLElement
-  sectionView.style.display = "none" 
-  listData(lista, reloadedSelectList)
-};
-
-
-// Dividi a função load em duas para modularizá-la
-function reloadSelect(select: HTMLSelectElement): HTMLSelectElement{
-  select.selectedIndex = 0
-  select.focus()
-  return select
-}
-
-
-// Utilizei type e não class para não fugir do paradadigma
-type Giants = {
-  id: number
-  name: string
-  bio: string
-};
+// Criando map com elementos HTML que serão utilizados
+const htmlElm = new Map<string, any>();
+htmlElm.set('selectList', document.getElementById("selecao"));
+htmlElm.set('sectionView', document.getElementById("dataViewSection"));
 
 
 let lista: Giants[] = [
-    {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
-    {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial"},
-    {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
-    {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar"}
+  {"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro algoritmo para ser processado por uma máquina"},
+  {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência da computação teórica e da inteligência artificial"},
+  {"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas contribuições ao projeto do moderno sistema de fornecimento de eletricidade em corrente alternada."},
+  {"id" : 4, "name": "Nicolau Copérnico", "bio" : "Nicolau Copérnico foi um astrônomo e matemático polonês que desenvolveu a teoria heliocêntrica do Sistema Solar"}
 ];
 
 
-function listData(lista:Giants[], selectList:HTMLSelectElement): void{
-  for(let i:number=1; i<=lista.length; ++i){
-    selectList.options[i].value = String(i)
-    selectList.options[i].text = lista[i-1].name
-  }
+// Dividi a função load em duas para modularizá-la (I)
+function load():void{
+  htmlElm.get('sectionView').style.display = "none";
+  listData(lista, reloadSelect(htmlElm.get('selectList')));
 };
 
 
+// Dividi a função load em duas para modularizá-la (II)
+function reloadSelect(select: HTMLSelectElement): HTMLSelectElement{
+  select.selectedIndex = 0;
+  select.focus();
+  return select;
+};
+
+
+// Utilizei type e não class para não fugir do paradadigma funcional
+type Giants = {
+  id: number;
+  name: string;
+  bio: string;
+};
+
+
+// Utilizando operador spread para transformar coleção HTML em array e poder iterá-lo
+// utilizando map e filter para manter propriedade de imutabilidade
+function listData(lista:Giants[], selectList:HTMLSelectElement): void{
+  let optionsToLoad = [...selectList].filter(option => option.value != '0');
+  optionsToLoad.map((op, index)=>{
+    op.value = String(index);
+    op.innerHTML = lista[index].name;
+  })
+};
+
+/****************************************************************************************************/
 // Exibe Id, Nome e bio do objeto selecionado
 function viewData(): void{
   const selectList: HTMLSelectElement = document.getElementById("selecao") as HTMLSelectElement
