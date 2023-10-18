@@ -1,4 +1,6 @@
-# Documentação Contador de Vogais
+# Documentação Exercíios Orion Bootcamp
+
+## Contador de Vogais
 
 O código-fonte foi desenvolvido em TypeScript. Tem a função principal de resolver o desafio abaixo descrito.
 
@@ -10,9 +12,9 @@ Para a letra b, além da funcionalidade requerida, foi acrescentado ao formulár
 
 
 
-## Funções
+### Funções
 
-### load
+#### load
 
 A função **load** é responsável capturar a hora em que o formulário está sendo visualizado e carregar no formulário as imagens, definir saudação e cor do background, com base no horário verificado.
 
@@ -21,7 +23,7 @@ A função **load** é responsável capturar a hora em que o formulário está s
 A função não requer parâmetros para execução e não possui retorno. É acioanada a partir do evento DOM 'onload' associado ao elemento 'body' do formulário.
 
 
-### countVowels
+#### countVowels
 
 A função **countVowels** é responsável por:
 
@@ -35,13 +37,51 @@ A função não requer parâmetros para execução e não possui retorno. É aci
 
 
 
-## Análise Assintótica
+### Análise Assintótica
 
-### Complexidade de Espaço
+#### Complexidade de Espaço
 
 A complexidade de espaço requerida em notação Big-O para os códigos-fonte fornecidos é dada por **O(1)**, constante. O espaço adicional requerido para avaliação da string de entrada é constante e utilizado para armazenar as variáveis *phrase* e *vowel* que armazenam a string inicialmente passada e a primeira palavra passada, respectivamente.
 
 
-### Complexidade de Tempo
+#### Complexidade de Tempo
 
 A complexidade de tempo requerida para o pior cenário, em notação Big-O, para os códigos-fonte fornecidos é dada por uma função **O(n)**, sendo *n* o tamanho da string incialmente passada, uma vez que a função split percorre toda a string inicialmente passada em busca do caracter indicado como separador, para que possa fazer a divisão desta em substrings.
+
+
+
+## Visualizar e Editar Dados
+
+O código-fonte foi desenvolvido em TypeScript. Tem a função principal de resolver o desafio abaixo descrito.
+
+>2 - Dado o array:
+>
+> let lista = new Array<Object> = [
+>{"id" : 1, "name": "Ada Lovelace", "bio" : "Ada Lovelace, foi uma matemática e escritora inglesa reconhecida por ter escrito o primeiro >algoritmo para ser processado por uma máquina"}, {"id" : 2, "name": "Alan Turing", "bio" : "Alan Turing foi um matemático, cientista da >computação, lógico, criptoanalista, filósofo e biólogo teórico britânico, ele é amplamente considerado o pai da ciência, da computação >teórica e da inteligência artificial"},{"id" : 3, "name": "Nikola Tesla", "bio" : "Nikola Tesla foi um inventor, engenheiro >eletrotécnico e engenheiro mecânico sérvio, mais conhecido por suas   > contribuições ao projeto do moderno sistema de fornecimento de  >eletricidade em corrente alternada."}, {"id" : 4, "name": "Nicolau Copérnico", "bio": "Nicolau Copérnico foi um astrônomo e matemático >polonês que desenvolveu a teoria heliocêntrica do Sistema Solar."}];
+>];
+> *a) **Crie uma função que retorne a bio do id passado
+> *b)* Crie uma função que retorne o name do id passado
+> *c)* Crie uma função que apague um item da lista a partir de um id passado
+> *d)* Crie uma função que altere a bio ou o name a partir de um id passado
+> *e)* Demonstre todas as funções com o paradigma funcional e com o imperativo
+
+
+
+### Funções
+
+#### 
+
+
+#### 
+
+
+### Análise Assintótica
+
+#### Complexidade de Espaço
+
+A complexidade de espaço requerida em notação Big-O para os códigos-fonte fornecidos é dada por **O()**, 
+
+
+#### Complexidade de Tempo
+
+A complexidade de tempo requerida para o pior cenário, em notação Big-O, para os códigos-fonte fornecidos é dada por uma função **O()**, 
