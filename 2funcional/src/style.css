@@ -36,6 +36,7 @@ img{
 #selectbox{
     font: normal 12pt Arial;
     color: black;
+    position:relative;
     text-align: center;
 }
 

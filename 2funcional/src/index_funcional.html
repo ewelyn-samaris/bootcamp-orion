@@ -14,15 +14,16 @@
     <div id="divprincipal">
         <p style="text-align: center;">Conheça um pouco da história desses gigantes:</p>
 
-        <section>
+        <section id="selectSection">
             <br><div id ="foto">
                 <img id="imagem" src="banner.png" alt="ciência">
             </div>
-            <div id="selectbox">
+            <div>
                 <label for="selecao">Nome: </label> 
-                <select id="selecao" onchange="viewData()">
-                    
-                </select>
+                <section id="selectboxSection" style="position: relative; width: 80%;">
+                    <select id="selecao" onchange="viewData()" style="width: 100%">
+                    </select>
+                </section>
             </div><br>
             <div id="edit">
                 <input type="button" value="Editar" onclick="editCall()"></input>
