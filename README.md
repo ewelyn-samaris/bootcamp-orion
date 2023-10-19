@@ -23,6 +23,7 @@ A função **load** é responsável capturar a hora em que o formulário está s
 A função não requer parâmetros para execução e não possui retorno. É acioanada a partir do evento DOM 'onload' associado ao elemento 'body' do formulário.
 
 
+
 #### countVowels
 
 A função **countVowels** é responsável por:
@@ -50,6 +51,8 @@ A complexidade de tempo requerida para o pior cenário, em notação Big-O, para
 
 
 
+
+
 ## Visualizar e Editar Dados
 
 O código-fonte foi desenvolvido em TypeScript. Tem a função principal de resolver o desafio abaixo descrito.
@@ -65,23 +68,56 @@ O código-fonte foi desenvolvido em TypeScript. Tem a função principal de reso
 > *d)* Crie uma função que altere a bio ou o name a partir de um id passado
 > *e)* Demonstre todas as funções com o paradigma funcional e com o imperativo
 
+Todos os itens do exercício foram resolvidos utilizandos os dois paradigmas: imperativo e funcional, e disponibilizados em arquivos distintos.
+
 
 
 ### Funções
 
-#### 
+#### Paradigma Imperativo
+Para as funções implementadas utilizando paradigma imperativo, evitou-se o uso de métodos específicos otimizados (tais como map, filter, forEach, etc) que abstraem o modo de execução das implementações, em lugar disso foram utilizados laços de repetição e estruturas condicionais para implementar as alterações e execuções necessárias, tendo em vista a descrição explícita de como o algoritmo deve funcionar, core do paradigma imperativo.
 
+#### Paradigma Funcional
+Para as funções implementadas a partir da utilização do paradigma funcional, priorixou-se a utilização de funções específicas otimizadas da linguagem que permitissem abstrair o modo de execução, focando de fato na implementação. Os elementos html e variáveis globais foram abstraídos em funções puras, a fim de evitar a mutabilidade dos dados. As mudanças de estado necessárias foram implementadas a partir da utilização de funções determinísticas, onde a implementação das alterações requeridas foram abstraídas em funções (ex.: funções show, hide, reload), afim de permirtir sempre o mesmo retorno para os mesmos argumentos. 
 
-#### 
+Para implementar as mudanças necessárias no array lista, foi implementado acesso direto à estrutura apenas para as funções que de fato implementam alterações nesta (editListItem e excludeListItem), para que as alterações pudessem ser refletidas na lista. Para todas as demais funções a consulta de dados na lista se dá pela função pura *list()*.
+
 
 
 ### Análise Assintótica
 
 #### Complexidade de Espaço
 
-A complexidade de espaço requerida em notação Big-O para os códigos-fonte fornecidos é dada por **O()**, 
+A complexidade de espaço requerida em notação Big-O para os códigos-fonte fornecidos é dada por uma função linear, **O(n)**, onde *n* é o número de elementos no array *lista* que é percorrido por inteiro a partir da utilização do método *forEach()* e *filter()*.
 
 
 #### Complexidade de Tempo
 
-A complexidade de tempo requerida para o pior cenário, em notação Big-O, para os códigos-fonte fornecidos é dada por uma função **O()**, 
+A complexidade de tempo requerida para o pior cenário, em notação Big-O, para os códigos-fonte fornecidos é dada por uma função **O(1)**, constante, pois as variáveis auxiliares requeridas estão relacionadas aos elementos na lista, mas não crescem junto com esta.
+
+
+
+
+
+## Publicação das Respostas do Exercício 2 com deploy automático
+
+Enunciado:
+
+>3 - Crie uma página web em que possamos visualizar todas as respostas e coloque o deploy automático a partir do github. Apresente o >formulário e o histórico de commits, demonstrando a sua linha de raciocínio.
+
+A resolução do exercício 2 disponibilizada considerou paradigma imperativo. Foi disponibilizada página web utilizando Github Pages e deploy automático através do Github Actions. Link:
+
+https://ewelyn-samaris.github.io/bootcamp-orion/
+
+O deploy respeita a divisão de pastas requerida e geração do artefato a partir da própria pipeline.
+
+A aplicação permite a partir da seleção do nome da pessoa de interesse, visualizar todas as informações: Id, nome e Bio; apagar itens da lista a partir da simples seleção do nome e editar nome ou bio da pessoa selecionada.
+
+Ao permitir executar as ações de visualizar e editar os dados dos itens e apagar itens a partir da seleção do nome, a aplicação contribui a uma melhor experiência do usuário, uma vez que este dificilmente saberá ou atentará para o ID de cada um deles. A manipulação de informações de Id, index, etc são feitas internamente pela aplicação.
+
+Além das funções requeridas, a aplicação utiliza/oferece:
+
+Criação dinâmica de elementos HTML, dinamizando a página;
+Garante edição apenas para seleção de item válido da lista;
+Verifica input do usuário para edição de nome/bio, não permitindo envio de nulo;
+Solicita confirmação do usuário para implementação de edição/exclusão, implementando apenas se confirmado.
