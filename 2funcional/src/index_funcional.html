@@ -14,22 +14,19 @@
     <div id="divprincipal">
         <p style="text-align: center;">Conheça um pouco da história desses gigantes:</p>
 
-        <section>
+        <section id="selectSection">
             <br><div id ="foto">
                 <img id="imagem" src="banner.png" alt="ciência">
             </div>
-            <div id="selectbox">
+            <div>
                 <label for="selecao">Nome: </label> 
-                <select id="selecao" required="required" onchange="viewData()"> 
-                    <option value="0">Escolha seu gigante.....</option>
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                    <option value="4"></option>
-                </select>
+                <section id="selectboxSection" style="position: relative; width: 80%;">
+                    <select id="selecao" onchange="viewData()" style="width: 100%">
+                    </select>
+                </section>
             </div><br>
             <div id="edit">
-                <input type="button" value="Editar" onclick="editCall()"></iput>
+                <input type="button" value="Editar" onclick="editCall()"></input>
             </div>
         </section><br>
         <section id="dataViewSection">
@@ -40,6 +37,6 @@
     <footer id="footer">
         <p>&copy;<span><strong>History Giants</strong></span>. Os gigantes que tornaram tudo possivel!</p>
     </footer>   
-    <script src="./app.js" defer></script>
+    <script src="../dist/ex02_funcional.js"></script>
 </body>
 </html>
